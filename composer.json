@@ -1,0 +1,26 @@
+{
+    "name": "pingu/user-module",
+    "description": "User module for pingu",
+    "type" : "asgard-module",
+    "authors": [
+        {
+            "name": "Boris Blondin",
+            "email": "blondin.boris@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Pingu\\User\\Providers\\UserServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Pingu\\User\\": ""
+        }
+    }
+}
