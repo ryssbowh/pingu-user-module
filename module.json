@@ -3,7 +3,7 @@
     "alias": "user",
     "description": "Defines user and groups",
     "keywords": [],
-    "order": -98,
+    "order": -99,
     "core": 1,
     "providers": [
         "Pingu\\User\\Providers\\UserServiceProvider"
