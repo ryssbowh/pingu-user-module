@@ -26,8 +26,7 @@ class S2019_08_06_175353055197_InstallUser extends MigratableSeeder
         $member = Role::findOrCreate('Member', ['description' => 'Members of the site']);
         $admin = Role::findOrCreate('Admin', ['description' => 'Admins who have access to back-end']);
 
-        $user = User::firstOrCreate(
-            ['name' => 'God'],
+        $user = (new User)->fill(
             [
                 'name' => 'God', 
                 'email' => 'pingu@god.com',
@@ -35,6 +34,7 @@ class S2019_08_06_175353055197_InstallUser extends MigratableSeeder
                 'email_verified_at' => \Carbon\Carbon::now()
             ]
         );
+        $user->save();
         $user->assignRole($god);
 
         /**

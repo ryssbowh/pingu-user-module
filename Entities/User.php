@@ -13,6 +13,8 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 use Pingu\Core\Support\Actions;
 use Pingu\Entity\Entities\BundledEntity;
+use Pingu\Field\Contracts\HasRevisionsContract;
+use Pingu\Field\Traits\HasRevisions;
 use Pingu\Permissions\Traits\HasPermissionsThroughRoles;
 use Pingu\Permissions\Traits\HasRoles;
 use Pingu\User\Entities\Actions\UserActions;
@@ -26,7 +28,8 @@ use Pingu\User\Events\UserDeleted;
 class User extends BundledEntity implements
     AuthenticatableContract,
     AuthorizableContract,
-    CanResetPasswordContract
+    CanResetPasswordContract,
+    HasRevisionsContract
 {
     use Authenticatable, 
         Authorizable, 
@@ -34,7 +37,8 @@ class User extends BundledEntity implements
         MustVerifyEmail, 
         Notifiable, 
         HasRoles, 
-        HasPermissionsThroughRoles;
+        HasPermissionsThroughRoles,
+        HasRevisions;
 
     protected $dispatchesEvents = [
         'deleting' => DeletingUser::class,
@@ -43,7 +47,7 @@ class User extends BundledEntity implements
         'updating' => UpdatingUser::class
     ];
 
-    protected $fillable = ['name', 'email', 'password', 'roles','test'];
+    protected $fillable = ['name', 'email', 'password', 'roles'];
 
     protected $visible = ['id', 'name', 'email', 'created_at', 'roles'];
 
@@ -64,7 +68,7 @@ class User extends BundledEntity implements
                 //Making sure we don't remove 'God' role for user 1
                 //or we could be locked out of our website
                 if ($user->id == 1) {
-                    $user->roles()->attach(Role::find(1));
+                    $user->assignRole(Role::find(1));
                 }
             }
         );
