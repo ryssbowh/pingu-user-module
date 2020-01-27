@@ -30,7 +30,7 @@ class Role extends Entity implements RoleContract
         'created' => RoleCreated::class
     ];
 
-    public $fillable = ['name', 'description'];
+    public $fillable = ['description', 'name'];
 
     public $visible = ['id', 'name', 'description'];
 
@@ -39,6 +39,15 @@ class Role extends Entity implements RoleContract
     public $adminListFields = ['name', 'description'];
 
     protected $descriptiveField = 'name';
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::retrieved(function($role){
+            $role->fillable = ['description'];
+        });
+    }
 
     public function getPolicy(): string
     {

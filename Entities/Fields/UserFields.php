@@ -17,6 +17,16 @@ class UserFields extends BundledEntityFieldRepository
      */
     protected function fields(): array
     {
+        $user = \Auth::user();
+        /**
+         * Only God users can add God users.
+         * And no one can add 'Guest' users which are only for unauthenticated users
+         */
+        if ($user->hasRole('God')) {
+            $items = Role::where('id', '!=', 2)->get();
+        } else {
+            $items = Role::whereNotIn('id', [1, 2])->get();
+        }
         return [
             new Text('name'),
             new Email('email'),
@@ -32,7 +42,7 @@ class UserFields extends BundledEntityFieldRepository
                     'model' => Role::class,
                     'textField' => ['name'],
                     'required' => true,
-                    'items' => Role::where('id', '!=', 2)->get()
+                    'items' => $items
                 ]
             )
         ];
