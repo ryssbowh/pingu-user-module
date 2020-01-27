@@ -26,24 +26,29 @@ class S2019_08_06_175353055197_InstallUser extends MigratableSeeder
         $member = Role::findOrCreate('Member', ['description' => 'Members of the site']);
         $admin = Role::findOrCreate('Admin', ['description' => 'Admins who have access to back-end']);
 
-        $user = (new User)->fill(
+        $user = User::create(
             [
                 'name' => 'God', 
-                'email' => 'pingu@god.com',
+                'email' => 'god@pingu.test',
                 'password' => 'admin',
                 'email_verified_at' => \Carbon\Carbon::now()
             ]
         );
-        $user->save();
         $user->assignRole($god);
+        $user = User::create(
+            [
+                'name' => 'Admin', 
+                'email' => 'admin@pingu.test',
+                'password' => 'admin',
+                'email_verified_at' => \Carbon\Carbon::now()
+            ]
+        );
+        $user->assignRole($admin);
 
         /**
          * Permissions
          */
         $browse = \Permissions::getPermissions(['name' => 'browse site'])->first();
-        $accessAdmin = \Permissions::getPermissions(['name' => 'access admin area'])->first();
-        $coreSettings = \Permissions::getPermissions(['name' => 'view core settings'])->first();
-        $editCoreSettings = \Permissions::getPermissions(['name' => 'edit core settings'])->first();
         $guest->givePermissionTo($browse);
         $member->givePermissionTo($browse);
 
@@ -55,9 +60,19 @@ class S2019_08_06_175353055197_InstallUser extends MigratableSeeder
                 $perm2,
                 $perm1,
                 $browse,
-                $accessAdmin,
-                $coreSettings,
-                $editCoreSettings,
+                \Permissions::getPermissions(['name' => 'access admin area'])->first(),
+                \Permissions::getPermissions(['name' => 'put site in maintenance mode'])->first(),
+                \Permissions::getPermissions(['name' => 'view site in maintenance mode'])->first(),
+                \Permissions::getPermissions(['name' => 'view modules'])->first(),
+                \Permissions::getPermissions(['name' => 'activate modules'])->first(),
+                \Permissions::getPermissions(['name' => 'manage form layouts'])->first(),
+                \Permissions::getPermissions(['name' => 'manage bundles'])->first(),
+                \Permissions::getPermissions(['name' => 'view revisions'])->first(),
+                \Permissions::getPermissions(['name' => 'restore revisions'])->first(),
+                Permission::findOrCreate(['name' => \Settings::repository('general')->accessPermission()]),
+                Permission::findOrCreate(['name' => \Settings::repository('general')->editPermission()]),
+                Permission::findOrCreate(['name' => \Settings::repository('mailing')->accessPermission()]),
+                Permission::findOrCreate(['name' => \Settings::repository('mailing')->editPermission()]),
                 Permission::findOrCreate(['name' => 'add roles', 'section' => 'User']),
                 Permission::findOrCreate(['name' => 'edit roles', 'section' => 'User']),
                 Permission::findOrCreate(['name' => 'delete roles', 'section' => 'User']),
