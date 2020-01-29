@@ -25,13 +25,11 @@ class S2019_08_06_175353055197_InstallUser extends MigratableSeeder
         $guest = Role::findOrCreate('Guest', ['description' => 'Unauthenticated users have this role']);
         $member = Role::findOrCreate('Member', ['description' => 'Members of the site']);
         $admin = Role::findOrCreate('Admin', ['description' => 'Admins who have access to back-end']);
-
         $user = User::create(
             [
                 'name' => 'God', 
                 'email' => 'god@pingu.test',
-                'password' => 'admin',
-                'email_verified_at' => \Carbon\Carbon::now()
+                'password' => 'admin'
             ]
         );
         $user->assignRole($god);
@@ -39,12 +37,10 @@ class S2019_08_06_175353055197_InstallUser extends MigratableSeeder
             [
                 'name' => 'Admin', 
                 'email' => 'admin@pingu.test',
-                'password' => 'admin',
-                'email_verified_at' => \Carbon\Carbon::now()
+                'password' => 'admin'
             ]
         );
         $user->assignRole($admin);
-
         /**
          * Permissions
          */
@@ -68,7 +64,7 @@ class S2019_08_06_175353055197_InstallUser extends MigratableSeeder
                 \Permissions::getPermissions(['name' => 'view revisions'])->first(),
                 \Permissions::getPermissions(['name' => 'restore revisions'])->first(),
                 Permission::findOrCreate(['name' => \Settings::repository('general')->accessPermission(), 'section' => 'Settings']),
-                Permission::findOrCreate(['name' => \Settings::repository('general')->editPermission()], 'section' => 'Settings'),
+                Permission::findOrCreate(['name' => \Settings::repository('general')->editPermission(), 'section' => 'Settings']),
                 Permission::findOrCreate(['name' => \Settings::repository('mailing')->accessPermission(), 'section' => 'Settings']),
                 Permission::findOrCreate(['name' => \Settings::repository('mailing')->editPermission(), 'section' => 'Settings']),
                 Permission::findOrCreate(['name' => 'add roles', 'section' => 'User']),

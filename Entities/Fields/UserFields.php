@@ -22,7 +22,7 @@ class UserFields extends BundledEntityFieldRepository
          * Only God users can add God users.
          * And no one can add 'Guest' users which are only for unauthenticated users
          */
-        if ($user->hasRole('God')) {
+        if ($user and $user->hasRole('God')) {
             $items = Role::where('id', '!=', 2)->get();
         } else {
             $items = Role::whereNotIn('id', [1, 2])->get();
