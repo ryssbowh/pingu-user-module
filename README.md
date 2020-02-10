@@ -18,8 +18,13 @@ Roles with users cannot be deleted.
 
 Passwords of God users cannot be changed unless you're a God yourself.
 
+The God role can only be granted by a God user.
+
 ## Events
 - `DeletingRole`
 - `DeletingUser`
-- `UserDeleted`
+- `RoleCreated`
 - `RoleDeleted`
+- `SavingUser`
+- `UpdatingUser`
+- `UserDeleted`
