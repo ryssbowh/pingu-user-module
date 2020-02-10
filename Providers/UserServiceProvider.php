@@ -63,6 +63,9 @@ class UserServiceProvider extends ModuleServiceProvider
         $this->mergeConfigFrom(
             __DIR__.'/../Config/config.php', 'user'
         );
+        $this->publishes([
+            __DIR__.'/../Config/config.php' => config_path('module-user.php')
+        ], 'config');
     }
 
     /**
