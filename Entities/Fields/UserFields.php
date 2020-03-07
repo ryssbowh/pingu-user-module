@@ -28,12 +28,18 @@ class UserFields extends BundledEntityFieldRepository
             $items = Role::whereNotIn('id', [1, 2])->get();
         }
         return [
-            new Text('name'),
-            new Email('email'),
-            new Password('password'),
+            new Text('name', [
+                'required' => true
+            ]),
+            new Email('email', [
+                'required' => true
+            ]),
+            new Password('password', [
+                'required' => true
+            ]),
             new Password(
                 'repeat_password',
-                [],
+                ['required' => true],
                 'Repeat password'
             ),
             new ManyModel(
