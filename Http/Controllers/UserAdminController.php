@@ -15,7 +15,11 @@ class UserAdminController extends AdminEntityController
         $url = ['url' => $user->uris()->make('savePassword', $user, adminPrefix())];
         $form = new EditPasswordForm($url, $user);
         \ContextualLinks::addFromObject($user);
-        return view('user::edit-password')->with(['form' => $form]);
+        return view()->first($this->getEditViewNames($user), [
+            'form' => $form,
+            'title' => 'Change password',
+            'entity' => $user
+        ]);
     }
 
     public function savePassword(User $user)
