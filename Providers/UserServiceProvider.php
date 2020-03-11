@@ -36,7 +36,7 @@ class UserServiceProvider extends ModuleServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerFactories();
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'user');
+        $this->loadModuleViewsFrom(__DIR__ . '/../Resources/views', 'user');
         config(['auth.providers.users.model' => User::class]);
     }
 
