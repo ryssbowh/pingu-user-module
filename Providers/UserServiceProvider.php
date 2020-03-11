@@ -64,8 +64,8 @@ class UserServiceProvider extends ModuleServiceProvider
             __DIR__.'/../Config/config.php', 'user'
         );
         $this->publishes([
-            __DIR__.'/../Config/config.php' => config_path('module-user.php')
-        ], 'config');
+            __DIR__.'/../Config/config.php' => config_path('user.php')
+        ], 'user-config');
     }
 
     /**
