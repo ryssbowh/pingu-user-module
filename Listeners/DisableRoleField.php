@@ -25,7 +25,7 @@ class DisableRoleField
      */
     public function handle($event)
     {
-        if ($event->form->getName() == 'edit-role') {
+        if ($event->form->getName() == 'edit-entity-role') {
             $event->form->getElement('name')->option('disabled', true);
         }
     }
