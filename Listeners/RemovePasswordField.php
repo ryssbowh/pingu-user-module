@@ -25,7 +25,7 @@ class RemovePasswordField
      */
     public function handle($event)
     {
-        if ($event->form->getName() == 'edit-entity-user') {
+        if ($event->form->getName() == 'edit-model-user') {
             $event->form->removeElement('password');
             $event->form->removeElement('repeat_password');
         }

@@ -2,6 +2,7 @@
 
 namespace Pingu\User\Bundles;
 
+use Illuminate\Database\Eloquent\Collection;
 use Pingu\Entity\Support\Bundle;
 use Pingu\User\Entities\User;
 
@@ -37,5 +38,13 @@ class UserBundle extends Bundle
     public function entityFor(): string
     {
         return User::class;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function entities(): Collection
+    {
+        return User::get();
     }
 }

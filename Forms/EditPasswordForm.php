@@ -28,7 +28,7 @@ class EditPasswordForm extends Form
      */
     public function elements(): array
     {
-        $fields = $this->user->fields()->toFormElements(['password', 'repeat_password']);
+        $fields = $this->user->fields()->toFormElements($this->user, ['password', 'repeat_password']);
         $fields[] = new Submit;
         return $fields;
     }
