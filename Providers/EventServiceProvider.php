@@ -11,8 +11,5 @@ use Pingu\User\Listeners\RemovePasswordRules;
 
 class EventServiceProvider extends ServiceProvider
 {
-    protected $listen = [
-        FormBuilt::class => [RemovePasswordField::class, DisableRoleField::class],
-        FieldsValidationRulesRetrieved::class => [RemovePasswordRules::class]
-    ];
+    protected $listen = [];
 }

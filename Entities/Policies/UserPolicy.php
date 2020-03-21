@@ -2,6 +2,7 @@
 
 namespace Pingu\User\Entities\Policies;
 
+use Pingu\Entity\Contracts\BundleContract;
 use Pingu\Entity\Entities\Entity;
 use Pingu\Entity\Support\BaseEntityPolicy;
 use Pingu\User\Entities\User;
@@ -46,7 +47,7 @@ class UserPolicy extends BaseEntityPolicy
         return $user->hasPermissionTo('delete users');
     }
 
-    public function create(?User $user)
+    public function create(?User $user, ?BundleContract $bundle = null)
     {
         $user = $this->userOrGuest($user);
         return $user->hasPermissionTo('add users');

@@ -26,39 +26,15 @@ class UserValidator extends BaseFieldsValidator
     /**
      * @inheritDoc
      */
-    protected function rules(): array
+    protected function rules(bool $updating): array
     {
         return [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$this->object->id,
-            'password' => 'required|min:8',
-            'repeat_password' => 'required|same:password',
+            'password' => $updating ? null : 'required|min:8',
+            'repeat_password' => $updating ? null : 'required|same:password',
             'roles' => 'required',
             'roles.*' => 'int'
         ];
     }
-
-    // protected function removeRequiredRule(string $rule): string
-    // {
-    //     $rule = explode('|', $rule);
-    //     $index = array_search('required', $rule);
-    //     if (is_int($index)) {
-    //         unset($rule[$index]);
-    //     }
-    //     return implode('|', $rule);
-    // }
-
-    // public function getRules($updating = true): array
-    // {
-    //     $rules = parent::getRules();
-    //     if ($updating) {
-    //         if (isset($rules['password'])) {
-    //             $rules['password'] = $this->removeRequiredRule($rules['password']);
-    //         }
-    //         if (isset($rules['repeat_password'])) {
-    //             $rules['repeat_password'] = $this->removeRequiredRule($rules['repeat_password']);
-    //         }
-    //     }
-    //     return $rules;
-    // }
 }

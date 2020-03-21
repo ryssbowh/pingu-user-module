@@ -2,6 +2,7 @@
 
 namespace Pingu\User\Entities\Policies;
 
+use Pingu\Entity\Contracts\BundleContract;
 use Pingu\Entity\Entities\Entity;
 use Pingu\Entity\Support\BaseEntityPolicy;
 use Pingu\User\Entities\Role;
@@ -44,7 +45,7 @@ class RolePolicy extends BaseEntityPolicy
         return $user->hasPermissionTo('delete roles');
     }
 
-    public function create(?User $user)
+    public function create(?User $user, ?BundleContract $bundle = null)
     {
         $user = $this->userOrGuest($user);
         return $user->hasPermissionTo('edit roles');

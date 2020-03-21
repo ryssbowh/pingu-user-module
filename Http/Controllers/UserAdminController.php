@@ -7,6 +7,7 @@ use Pingu\Entity\Http\Controllers\AdminEntityController;
 use Pingu\Forms\Support\ModelForm;
 use Pingu\User\Entities\User;
 use Pingu\User\Forms\EditPasswordForm;
+use Pingu\User\Http\Requests\SavePasswordRequest;
 
 class UserAdminController extends AdminEntityController
 {
@@ -22,9 +23,9 @@ class UserAdminController extends AdminEntityController
         ]);
     }
 
-    public function savePassword(User $user)
+    public function savePassword(SavePasswordRequest $request, User $user)
     {
-        $validated = $user->validator()->validateUpdateRequest($this->request);
+        $validated = $request->validated();
         $user->password = $validated['password'];
         $user->save();
         \Notify::put('success', 'Password updated');

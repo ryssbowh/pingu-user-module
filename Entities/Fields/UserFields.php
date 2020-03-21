@@ -53,4 +53,12 @@ class UserFields extends BundledEntityFieldRepository
             )
         ];
     }
+
+    protected function alterFieldsForForm(Collection $fields, bool $updating)
+    {
+        if ($updating) {
+            $fields->forget('password');
+            $fields->forget('repeat_password');
+        }
+    }
 }

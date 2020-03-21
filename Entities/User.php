@@ -59,6 +59,8 @@ class User extends BundledEntity implements
         'name', 'email'
     ];
 
+    protected $ignoreInRevisions = ['password', 'repeat_password'];
+
     public static function boot()
     {
         parent::boot();
