@@ -10,16 +10,7 @@ class UserUris extends BaseEntityUris
     {
         return [
             'editPassword' => $this->entity::routeSlug().'/{'.$this->entity::routeSlug().'}/password',
-            'savePassword' =>$this->entity::routeSlug().'/{'.$this->entity::routeSlug().'}/password',
-            'logout' => 'logout',
-            'showLoginForm' => 'login',
-            'login' => 'login',
-            'showRegistrationForm' => 'register',
-            'register' => 'register',
-            'showLinkRequestForm' => 'password-request',
-            'sendResetLinkEmail' => 'password-request',
-            'showResetForm' => 'reset-password',
-            'reset' =>'reset-password'
+            'savePassword' =>$this->entity::routeSlug().'/{'.$this->entity::routeSlug().'}/password'
         ];
     }
 }

@@ -10,11 +10,4 @@ use Pingu\User\Http\Controllers\ResetPasswordController;
 
 class RoleRoutes extends BaseEntityRoutes
 {
-    protected function names(): array
-    {
-        return [
-            'admin.index' => 'user.admin.roles',
-            'admin.create' => 'user.admin.roles.create'
-        ];
-    }
 }

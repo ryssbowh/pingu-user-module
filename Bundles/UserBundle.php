@@ -27,14 +27,6 @@ class UserBundle extends Bundle
     /**
      * @inheritDoc
      */
-    public function getRouteKey(): string
-    {
-        return 'user.user';
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function entityFor(): string
     {
         return User::class;

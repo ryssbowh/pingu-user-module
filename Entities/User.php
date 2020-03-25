@@ -61,6 +61,8 @@ class User extends BundledEntity implements
 
     protected $ignoreInRevisions = ['password', 'repeat_password'];
 
+    public $descriptiveField = 'name';
+
     public static function boot()
     {
         parent::boot();
@@ -121,5 +123,15 @@ class User extends BundledEntity implements
         if ($value) {
             $this->attributes['password'] = \Hash::make($value);
         }
+    }
+
+    /**
+     * Is this user a god ?
+     * 
+     * @return boolean
+     */
+    public function isGod()
+    {
+        return $this->hasRole('God');
     }
 }

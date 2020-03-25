@@ -38,7 +38,7 @@ class Role extends Entity implements RoleContract
 
     public $adminListFields = ['name', 'description'];
 
-    protected $descriptiveField = 'name';
+    public $descriptiveField = 'name';
 
     public static function boot()
     {
