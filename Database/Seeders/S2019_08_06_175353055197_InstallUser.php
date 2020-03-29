@@ -90,7 +90,7 @@ class S2019_08_06_175353055197_InstallUser extends MigratableSeeder
         $item = MenuItem::create(
             [
                 'name' => 'Users',
-                'url' => 'user.admin.users',
+                'url' => 'user.admin.index',
                 'weight' => 3,
                 'active' => 1,
                 'deletable' => 0,
@@ -101,7 +101,7 @@ class S2019_08_06_175353055197_InstallUser extends MigratableSeeder
         MenuItem::create(
             [
                 'name' => 'Roles',
-                'url' => 'user.admin.roles',
+                'url' => 'role.admin.index',
                 'active' => 1,
                 'deletable' => 0,
                 'permission_id' => $perm1->id

@@ -30,11 +30,10 @@ class UserValidator extends BaseFieldsValidator
     {
         return [
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$this->object->id,
+            'email' => 'required|unique:users,email'.($updating ? ','.$this->object->id : ''),
             'password' => $updating ? null : 'required|min:8',
             'repeat_password' => $updating ? null : 'required|same:password',
-            'roles' => 'required',
-            'roles.*' => 'int'
+            'roles' => 'required'
         ];
     }
 }
