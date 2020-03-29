@@ -3,11 +3,11 @@
 namespace Pingu\User\Entities\Fields;
 
 use Illuminate\Support\Collection;
+use Pingu\Entity\Support\FieldRepository\BundledEntityFieldRepository;
 use Pingu\Field\BaseFields\Email;
 use Pingu\Field\BaseFields\ManyModel;
 use Pingu\Field\BaseFields\Password;
 use Pingu\Field\BaseFields\Text;
-use Pingu\Field\Support\FieldRepository\BundledEntityFieldRepository;
 use Pingu\User\Entities\Role;
 
 class UserFields extends BundledEntityFieldRepository
@@ -22,7 +22,7 @@ class UserFields extends BundledEntityFieldRepository
          * Only God users can add God users.
          * And no one can add 'Guest' users which are only for unauthenticated users
          */
-        if ($user and $user->hasRole('God')) {
+        if ($user and $user->hasRole(1)) {
             $items = Role::where('id', '!=', 2)->get();
         } else {
             $items = Role::whereNotIn('id', [1, 2])->get();

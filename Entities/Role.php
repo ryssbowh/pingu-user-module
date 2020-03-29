@@ -5,7 +5,7 @@ namespace Pingu\User\Entities;
 use Illuminate\Database\Eloquent\Builder;
 use Pingu\Core\Contracts\Models\HasAdminRoutesContract;
 use Pingu\Core\Entities\BaseModel;
-use Pingu\Entity\Entities\Entity;
+use Pingu\Entity\Support\Entity;
 use Pingu\Jsgrid\Fields\{Text as JsGridText, Control};
 use Pingu\Jsgrid\Traits\Models\JsGridable;
 use Pingu\Permissions\Contracts\Role as RoleContract;

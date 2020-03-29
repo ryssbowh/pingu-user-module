@@ -3,17 +3,12 @@
 namespace Pingu\User\Entities\Policies;
 
 use Pingu\Entity\Contracts\BundleContract;
-use Pingu\Entity\Entities\Entity;
-use Pingu\Entity\Support\BaseEntityPolicy;
+use Pingu\Entity\Support\Entity;
+use Pingu\Entity\Support\Policies\BaseEntityPolicy;
 use Pingu\User\Entities\User;
 
 class UserPolicy extends BaseEntityPolicy
 {
-    protected function userOrGuest(?User $user)
-    {
-        return $user ? $user : \Permissions::guestRole();
-    }
-
     public function index(?User $user)
     {
         $user = $this->userOrGuest($user);
@@ -28,7 +23,9 @@ class UserPolicy extends BaseEntityPolicy
 
     public function edit(?User $user, Entity $entity)
     {
-        if ($user and $entity->hasRole('God') and !$user->hasRole('God')) {
+        if (!$user
+            or ($entity->hasRole(1) and !$user->hasRole(1))
+        ) {
             return false;
         }
         $user = $this->userOrGuest($user);
@@ -37,10 +34,11 @@ class UserPolicy extends BaseEntityPolicy
 
     public function delete(?User $user, Entity $entity)
     {
-        if ($entity->id == 1) {
-            return false;
-        }
-        if ($user and $entity->hasRole('God') and !$user->hasRole('God')) {
+        if (!$user
+            or $entity->id == 1
+            or ($entity->hasRole(1) and !$user->hasRole(1))
+            or (!$entity->users->isEmpty())
+        ) {
             return false;
         }
         $user = $this->userOrGuest($user);
@@ -55,7 +53,10 @@ class UserPolicy extends BaseEntityPolicy
 
     public function resetPasswords(?User $user, User $entity)
     {
-        if ($user and $entity->hasRole('God') and !$user->hasRole('God')) {
+        if (!$user
+            or ($entity->user == 1 and !$user->id ==1)
+            or ($entity->hasRole(1) and !$user->hasRole(1))
+        ) {
             return false;
         }
         $user = $this->userOrGuest($user);

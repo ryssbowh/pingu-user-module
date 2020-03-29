@@ -2,7 +2,7 @@
 
 namespace Pingu\User\Entities\Uris;
 
-use Pingu\Entity\Support\BaseEntityUris;
+use Pingu\Entity\Support\Uris\BaseEntityUris;
 
 class UserUris extends BaseEntityUris
 {

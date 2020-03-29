@@ -3,15 +3,15 @@
 namespace Pingu\User\Bundles;
 
 use Illuminate\Database\Eloquent\Collection;
-use Pingu\Entity\Support\Bundle;
+use Pingu\Entity\Support\Bundle\ClassBundle;
 use Pingu\User\Entities\User;
 
-class UserBundle extends Bundle
+class UserBundle extends ClassBundle
 {   
     /**
      * @inheritDoc
      */
-    public function bundleFriendlyName(): string
+    public function friendlyName(): string
     {
         return 'User';
     }
@@ -19,9 +19,9 @@ class UserBundle extends Bundle
     /**
      * @inheritDoc
      */
-    public function bundleName(): string
+    public function name(): string
     {
-        return 'user.user';
+        return 'user';
     }
 
     /**

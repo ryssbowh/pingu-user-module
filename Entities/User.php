@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 use Pingu\Core\Support\Actions;
-use Pingu\Entity\Entities\BundledEntity;
+use Pingu\Entity\Support\BundledEntity;
 use Pingu\Field\Contracts\HasRevisionsContract;
 use Pingu\Field\Traits\HasRevisions;
 use Pingu\Permissions\Traits\HasPermissionsThroughRoles;
@@ -91,7 +91,7 @@ class User extends BundledEntity implements
      */
     public function bundleName(): string
     {
-        return 'user.user';
+        return 'user';
     }
 
     /**
