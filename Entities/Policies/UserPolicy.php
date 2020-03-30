@@ -37,7 +37,6 @@ class UserPolicy extends BaseEntityPolicy
         if (!$user
             or $entity->id == 1
             or ($entity->hasRole(1) and !$user->hasRole(1))
-            or (!$entity->users->isEmpty())
         ) {
             return false;
         }

@@ -55,12 +55,16 @@ class User extends BundledEntity implements
 
     public $guard = 'web';
 
+    /**
+     * @inheritDoc
+     */
     public $adminListFields = [
         'name', 'email'
     ];
 
-    protected $ignoreInRevisions = ['password', 'repeat_password'];
-
+    /**
+     * @inheritDoc
+     */
     public $descriptiveField = 'name';
 
     public static function boot()
@@ -76,6 +80,14 @@ class User extends BundledEntity implements
                 }
             }
         );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function ignoreInRevisions()
+    {
+        return ['password', 'repeat_password'];
     }
 
     /**
