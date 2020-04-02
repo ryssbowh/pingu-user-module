@@ -26,7 +26,7 @@ class LoginController extends BaseController
     public function showLoginForm()
     {
         $form = new LoginForm();
-        return view('user::login')->with(['form' => $form]);
+        return view('user@login')->with(['form' => $form]);
     }
 
     protected function authenticated(Request $request, $user)

@@ -46,7 +46,7 @@ class LoginForm extends Form
      * 
      * @return string
      */
-    protected function method(): string
+    public function method(): string
     {
         return 'POST';
     }
@@ -60,7 +60,7 @@ class LoginForm extends Form
      * @return array
      * @see    https://github.com/LaravelCollective/docs/blob/5.6/html.md
      */
-    protected function action(): array
+    public function action(): array
     {
         return ['route' => 'user.login'];
     }
