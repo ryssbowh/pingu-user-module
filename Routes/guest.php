@@ -5,9 +5,6 @@ Route::get('login', 'LoginController@showLoginForm')
 Route::post('login', 'LoginController@login')
     ->name('user.login');
 
-Route::post('logout', 'LoginController@logout')
-    ->name('user.logout');
-
 Route::get('register', 'RegisterController@showRegistrationForm')
     ->name('user.registerForm');
 Route::post('register', 'RegisterController@register')
