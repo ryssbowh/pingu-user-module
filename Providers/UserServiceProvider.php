@@ -38,6 +38,8 @@ class UserServiceProvider extends ModuleServiceProvider
         $this->registerFactories();
         $this->loadModuleViewsFrom(__DIR__ . '/../Resources/views', 'user');
         config(['auth.providers.users.model' => User::class]);
+        (new UserBundle)->register();
+        $this->registerEntities($this->entities);
     }
 
     /**
@@ -49,8 +51,6 @@ class UserServiceProvider extends ModuleServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(EventServiceProvider::class);
-        (new UserBundle)->register();
-        $this->registerEntities($this->entities);
     }
 
     /**

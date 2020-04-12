@@ -65,6 +65,7 @@ class S2019_08_06_175353055197_InstallUser extends MigratableSeeder
                 \Permissions::getPermissions(['name' => 'manage bundles'])->first(),
                 \Permissions::getPermissions(['name' => 'view revisions'])->first(),
                 \Permissions::getPermissions(['name' => 'restore revisions'])->first(),
+                \Permissions::getPermissions(['name' => 'manage cache'])->first(),
                 Permission::findOrCreate(['name' => \Settings::repository('general')->accessPermission(), 'section' => 'Settings']),
                 Permission::findOrCreate(['name' => \Settings::repository('general')->editPermission(), 'section' => 'Settings']),
                 Permission::findOrCreate(['name' => \Settings::repository('mailing')->accessPermission(), 'section' => 'Settings']),
