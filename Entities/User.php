@@ -12,11 +12,14 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 use Pingu\Core\Support\Actions;
+use Pingu\Entity\Contracts\BundleContract;
 use Pingu\Entity\Support\BundledEntity;
+use Pingu\Entity\Traits\HasViewModes;
 use Pingu\Field\Contracts\HasRevisionsContract;
 use Pingu\Field\Traits\HasRevisions;
 use Pingu\Permissions\Traits\HasPermissionsThroughRoles;
 use Pingu\Permissions\Traits\HasRoles;
+use Pingu\User\Bundles\UserBundle;
 use Pingu\User\Entities\Actions\UserActions;
 use Pingu\User\Entities\Policies\UserPolicy;
 use Pingu\User\Entities\Role;
@@ -38,7 +41,8 @@ class User extends BundledEntity implements
         Notifiable, 
         HasRoles, 
         HasPermissionsThroughRoles,
-        HasRevisions;
+        HasRevisions,
+        HasViewModes;
 
     protected $dispatchesEvents = [
         'deleting' => DeletingUser::class,
@@ -101,9 +105,17 @@ class User extends BundledEntity implements
     /**
      * @inheritDoc
      */
-    public function bundleName(): string
+    public function bundleClass(): string
     {
-        return 'user';
+        return UserBundle::class;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function bundleInstance(): ?BundleContract
+    {
+        return new UserBundle;
     }
 
     /**

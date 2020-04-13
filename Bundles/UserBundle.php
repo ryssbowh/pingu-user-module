@@ -31,12 +31,4 @@ class UserBundle extends ClassBundle
     {
         return User::class;
     }
-
-    /**
-     * @inheritDoc
-     */
-    public function entities(): Collection
-    {
-        return User::get();
-    }
 }
