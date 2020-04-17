@@ -25,22 +25,7 @@ class S2019_08_06_175353055197_InstallUser extends MigratableSeeder
         $guest = Role::findOrCreate('Guest', ['description' => 'Unauthenticated users have this role']);
         $member = Role::findOrCreate('Member', ['description' => 'Members of the site']);
         $admin = Role::findOrCreate('Admin', ['description' => 'Admins who have access to back-end']);
-        $user = User::create(
-            [
-                'name' => 'God', 
-                'email' => 'god@pingu.test',
-                'password' => 'admin'
-            ]
-        );
-        $user->assignRole($god);
-        $user = User::create(
-            [
-                'name' => 'Admin', 
-                'email' => 'admin@pingu.test',
-                'password' => 'admin'
-            ]
-        );
-        $user->assignRole($admin);
+
         /**
          * Permissions
          */
