@@ -3,13 +3,13 @@
 namespace Pingu\User\Entities\Routes;
 
 use Pingu\Entity\Support\Routes\BaseEntityRoutes;
-use Pingu\User\Http\Controllers\ForgotPasswordController;
-use Pingu\User\Http\Controllers\LoginController;
-use Pingu\User\Http\Controllers\RegisterController;
-use Pingu\User\Http\Controllers\ResetPasswordController;
+use Pingu\User\Http\Controllers\AdminChangePasswordController;
 
 class UserRoutes extends BaseEntityRoutes
 {
+    /**
+     * @inheritDoc
+     */
     protected function routes(): array
     {
         return [
@@ -19,11 +19,25 @@ class UserRoutes extends BaseEntityRoutes
         ];
     }
 
+    /**
+     * @inheritDoc
+     */
     protected function middlewares(): array
     {
         return [
             'editPassword' => 'can:reset-passwords,user',
             'savePassword' => 'can:reset-passwords,user'
+        ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function controllers(): array
+    {
+        return [
+            'admin.editPassword' => AdminChangePasswordController::class,
+            'admin.savePassword' => AdminChangePasswordController::class
         ];
     }
 }

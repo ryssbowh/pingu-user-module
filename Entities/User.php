@@ -27,6 +27,8 @@ use Pingu\User\Events\DeletingUser;
 use Pingu\User\Events\SavingUser;
 use Pingu\User\Events\UpdatingUser;
 use Pingu\User\Events\UserDeleted;
+use Pingu\User\Http\Contexts\EditPasswordContext;
+use Pingu\User\Http\Contexts\UpdatePasswordContext;
 
 class User extends BundledEntity implements
     AuthenticatableContract,
@@ -44,6 +46,9 @@ class User extends BundledEntity implements
         HasRevisions,
         HasViewModes;
 
+    /**
+     * @inheritDoc
+     */
     protected $dispatchesEvents = [
         'deleting' => DeletingUser::class,
         'deleted' => UserDeleted::class,
@@ -51,12 +56,29 @@ class User extends BundledEntity implements
         'updating' => UpdatingUser::class
     ];
 
+    /**
+     * @inheritDoc
+     */
+    public static $routeContexts = [EditPasswordContext::class, UpdatePasswordContext::class];
+
+    /**
+     * @inheritDoc
+     */
     protected $fillable = ['name', 'email', 'password', 'roles'];
 
+    /**
+     * @inheritDoc
+     */
     protected $visible = ['id', 'name', 'email', 'created_at', 'roles'];
 
+    /**
+     * @inheritDoc
+     */
     protected $with = ['roles'];
 
+    /**
+     * @inheritDoc
+     */
     public $guard = 'web';
 
     /**
@@ -71,6 +93,9 @@ class User extends BundledEntity implements
      */
     public $descriptiveField = 'name';
 
+    /**
+     * Boot User
+     */
     public static function boot()
     {
         parent::boot();
@@ -97,14 +122,6 @@ class User extends BundledEntity implements
     /**
      * @inheritDoc
      */
-    public function getPolicy(): string
-    {
-        return UserPolicy::class;
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function bundleClass(): string
     {
         return UserBundle::class;
@@ -116,14 +133,6 @@ class User extends BundledEntity implements
     protected function bundleInstance(): ?BundleContract
     {
         return new UserBundle;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function getActionsInstance(): Actions
-    {
-        return new UserActions($this);
     }
 
     /**

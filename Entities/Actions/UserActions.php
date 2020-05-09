@@ -2,6 +2,7 @@
 
 namespace Pingu\User\Entities\Actions;
 
+use Pingu\Core\Support\Actions\BaseAction;
 use Pingu\Entity\Support\Actions\BaseEntityActions;
 
 class UserActions extends BaseEntityActions
@@ -14,15 +15,16 @@ class UserActions extends BaseEntityActions
     public function actions(): array
     {
         return [
-            'password' => [
-                'label' => 'Change Password',
-                'url' => function ($user) {
-                    return $user::uris()->make('editPassword', $user, adminPrefix());
+            'password' => new BaseAction(
+                'Change Password',
+                function ($user, $prefix) {
+                    return $user::uris()->make('edit', $user, $prefix);
                 },
-                'access' => function ($user) {
+                function ($user) {
                     return \Gate::check('reset-passwords', $user);
-                }
-            ]
+                },
+                'admin'
+            )
         ];
     }
 }

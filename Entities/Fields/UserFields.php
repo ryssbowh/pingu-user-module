@@ -54,11 +54,34 @@ class UserFields extends BundledEntityFieldRepository
         ];
     }
 
-    protected function alterFieldsForForm(Collection $fields, bool $updating)
+    /**
+     * @inheritDoc
+     */
+    protected function messages(): array
     {
-        if ($updating) {
-            $fields->forget('password');
-            $fields->forget('repeat_password');
-        }
+        return [
+            'name.required' => 'Name is required',
+            'email.required' => 'Email is required',
+            'email.unique' => 'Email is already in use',
+            'email.email' => 'Please enter a valid email address',
+            'roles.required' => 'Role is required',
+            'password.required' => 'Password is required',
+            'password.min' => 'Password is too short',
+            'repeat_password.same' => 'The 2 passwords must be the same'
+        ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function rules(): array
+    {
+        return [
+            'name' => 'required',
+            'email' => 'required|unique:users,email,'.$this->object->id,
+            'password' => 'required|min:8',
+            'repeat_password' => 'required|same:password',
+            'roles' => 'required'
+        ];
     }
 }

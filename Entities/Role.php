@@ -13,6 +13,7 @@ use Pingu\Permissions\Entities\Permission;
 use Pingu\Permissions\Exceptions\RoleDoesNotExist;
 use Pingu\Permissions\Guard;
 use Pingu\Permissions\Traits\HasPermissions;
+use Pingu\User\Contexts\EditContext;
 use Pingu\User\Entities\Policies\RolePolicy;
 use Pingu\User\Entities\User;
 use Pingu\User\Events\DeletingRole;
@@ -47,11 +48,6 @@ class Role extends Entity implements RoleContract
         static::retrieved(function($role){
             $role->fillable = ['description'];
         });
-    }
-
-    public function getPolicy(): string
-    {
-        return RolePolicy::class;
     }
 
     /**

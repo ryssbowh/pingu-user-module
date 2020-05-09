@@ -2,15 +2,15 @@
 
 namespace Pingu\User\Entities\Uris;
 
-use Pingu\Entity\Support\Uris\BaseEntityUris;
+use Pingu\Core\Support\Uris\BaseModelUris;
 
-class UserUris extends BaseEntityUris
+class UserUris extends BaseModelUris
 {
     public function uris(): array
     {
         return [
-            'editPassword' => $this->entity::routeSlug().'/{'.$this->entity::routeSlug().'}/password',
-            'savePassword' =>$this->entity::routeSlug().'/{'.$this->entity::routeSlug().'}/password'
+            'editPassword' => '@slug@/{@slug@}/password',
+            'savePassword' => '@slug@/{@slug@}/password'
         ];
     }
 }

@@ -24,4 +24,25 @@ class RoleFields extends BaseFieldRepository
             )
         ];
     }
+
+    /**
+     * @inheritDoc
+     */
+    protected function rules(): array
+    {
+        return [
+            'name' => 'required|string',
+            'description' => 'string|required',
+        ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function messages(): array
+    {
+        return [
+            'name.required' => 'Name is required',
+        ];
+    }
 }
